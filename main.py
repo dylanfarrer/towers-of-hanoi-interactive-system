@@ -6,6 +6,11 @@ from tower_of_hanoi.a_star import hanoi_a_star
 from tower_of_hanoi.comparators import compare_PDB, comparison
 from tower_of_hanoi.bfs import hanoi_bfs
 
+"""
+main.py
+
+Entry point for module.
+"""
 
 def main():
     """
@@ -56,16 +61,16 @@ def main():
                                             "type '3' ---- Using PDB (where max m is 7)\n\n"
                                             "Enter a number to pick the heuristic.\n\n> "))
 
-                result = hanoi_a_star(initial_state, goal_state, num_discs, heuristic_type)
+                result, timeTaken = hanoi_a_star(initial_state, goal_state, num_discs, heuristic_type)
 
             elif search_type == 1:
-                result = hanoi_bfs(initial_state, goal_state)
+                result, timeTaken = hanoi_bfs(initial_state, goal_state)
 
             if result:
                 print("Solution found:\n")
                 for state in result:
                     State(state).print_tower(num_discs)
-                print("Finished!")
+                print("Finished with {} states in the result. Time taken = {} seconds.".format(len(result), timeTaken))
             else:
                 print("No solution found.")
         

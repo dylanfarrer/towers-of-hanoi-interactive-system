@@ -5,6 +5,17 @@ from .state import State
 from .bfs import hanoi_bfs, PDB_bfs
 from .a_star import hanoi_a_star
 
+"""
+comparators.py
+
+This file holds the functions that are used to compare the
+performance of the different search algorithms used in this module. 
+
+comparison() compares the performance of the A* heuristics adn BFS with increasing n.
+
+compare_PDB() compares the performance of the PDB heuristic with increasing n.
+"""
+
 def handler(signum, frame):
     """
     Handle a timoute exception. Used to exit methods that are taking too long.
