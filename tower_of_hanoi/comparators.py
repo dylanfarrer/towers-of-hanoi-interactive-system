@@ -112,7 +112,7 @@ def comparison():
         n += 1
     
     print("\n\n\nTime for each heuristic to run (seconds), with increasing n:\n")
-    print('-' * 120)
+    print('-' * 149)
     print("| ", end="")
     n = 1
     for result in results["bfs"]:
@@ -122,7 +122,7 @@ def comparison():
             print("n = %d, t = %1.5f" % (n, result), end=" | ")
         n += 1
     print("BFS")
-    print('-' * 120)
+    print('-' * 149)
     print("| ", end="")
     n = 1
     for result in results["A*1"]:
@@ -132,7 +132,7 @@ def comparison():
             print("n = %d, t = %1.5f" % (n, result), end=" | ")
         n += 1
     print("Misplaced disk no.")
-    print('-' * 120)
+    print('-' * 149)
     print("| ", end="")
     n = 1
     for result in results["A*2"]:
@@ -142,7 +142,7 @@ def comparison():
             print("n = %d, t = %1.5f" % (n, result), end=" | ")
         n += 1
     print("Largest pile")
-    print('-' * 120)
+    print('-' * 149)
     print("| ", end="")
     n = 1
     for result in results["A*3"]:
@@ -152,7 +152,7 @@ def comparison():
             print("n = %d, t = %1.5f" % (n, result), end=" | ")
         n += 1
     print("Max misplaced disk plus pile on it")
-    print('-' * 120)
+    print('-' * 149)
     print()
 
 def compare_PDB():

@@ -84,11 +84,6 @@ def hanoi_a_star(initial_state, goal_state, num_discs, heuristic_type, PDB=None)
     if heuristic_type == 3 and PDB is None:
         print("Creating PDB (can take up to 2 minutes)...")
         if num_discs < 8:
-            towers = [[] for _ in range(4)]
-
-            # Populate the source tower with discs
-            towers[0] = list(range(7, 0, -1))
-
             PDB = PDB_bfs(goal_state)
         else:
             towers = [[] for _ in range(4)]
