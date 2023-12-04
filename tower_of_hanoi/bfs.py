@@ -1,5 +1,16 @@
 import time
 
+"""
+bfs.py
+
+This file contains all BFS related methods in the module.
+
+hanoi_bfs() solves the Tower of Hanoi puzzle using breadth-first search.
+
+PDB_bfs() creates a PDB for the Tower of Hanoi problem, to be used 
+by A* as a heuristic. 
+"""
+
 def hanoi_bfs(initial_state, goal_state):
     """
     Solve the Tower of Hanoi puzzle using breadth-first search.
@@ -7,16 +18,19 @@ def hanoi_bfs(initial_state, goal_state):
     open_list, closed_list = [], []
     open_list.append((initial_state, [initial_state]))
 
+    startTime = time.time()
+
     while open_list:
         current, path = open_list.pop(0)
 
         closed_list.append(current)
 
         if (current.get_state() == goal_state.get_state()):
+            finalTime = time.time() - startTime
             reconst_path = []
             for state in path:
                 reconst_path.append(state.get_state())
-            return reconst_path
+            return reconst_path, finalTime
         else:
             for state in current.get_neighbours():
                 present_in_closed_list = False

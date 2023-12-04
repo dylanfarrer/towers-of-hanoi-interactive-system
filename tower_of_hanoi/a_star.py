@@ -1,6 +1,18 @@
+import time
 
 from .state import State
 from .bfs import PDB_bfs
+
+"""
+a_star.py
+
+This file contains all A* related methods in the module.
+
+hanoi_heuristic() contains all heuristic logic.
+
+hanoi_a_star() solves the Tower of Hanoi puzzle using A* search and
+utilises hanoi_heuristic to do so.
+"""
 
 def hanoi_heuristic(state, num_discs, heuristic_type, PDB):
     """
@@ -8,10 +20,19 @@ def hanoi_heuristic(state, num_discs, heuristic_type, PDB):
     """
     # number of misplaced disks
     if heuristic_type == 0:
+        """
         misplaced_disks_not_on_goal_state = num_discs - len((state.get_state())[3])
         if len((state.get_state())[3]) > 1 and (state.get_state())[3][0] != num_discs:
            return misplaced_disks_not_on_goal_state + len((state.get_state())[3])
         return misplaced_disks_not_on_goal_state
+        """
+
+        correct_discs = 0
+        for disc in range(len(state.get_state()[3])):
+            if state.get_state()[3][disc] == num_discs - disc:
+                correct_discs += 1
+        return num_discs - correct_discs
+
 
     # double the size of the largest pile of disks that is not a partial or complete goal state then minus one
     if heuristic_type == 1:
@@ -63,11 +84,6 @@ def hanoi_a_star(initial_state, goal_state, num_discs, heuristic_type, PDB=None)
     if heuristic_type == 3 and PDB is None:
         print("Creating PDB (can take up to 2 minutes)...")
         if num_discs < 8:
-            towers = [[] for _ in range(4)]
-
-            # Populate the source tower with discs
-            towers[0] = list(range(7, 0, -1))
-
             PDB = PDB_bfs(goal_state)
         else:
             towers = [[] for _ in range(4)]
@@ -75,6 +91,7 @@ def hanoi_a_star(initial_state, goal_state, num_discs, heuristic_type, PDB=None)
             PDB = PDB_bfs(State([row for row in towers[::-1]]))
 
     print("Calculating...")
+    startTime = time.time()
     
     while len(open_list) > 0:
         n = None
@@ -89,6 +106,7 @@ def hanoi_a_star(initial_state, goal_state, num_discs, heuristic_type, PDB=None)
             return None
         
         if n.get_state() == goal_state.get_state():
+            finalTime = time.time() - startTime
             reconst_path = []
             while parents[n] != n:
                 reconst_path.append(n.get_state())
@@ -98,7 +116,7 @@ def hanoi_a_star(initial_state, goal_state, num_discs, heuristic_type, PDB=None)
 
             reconst_path.reverse()
 
-            return reconst_path
+            return reconst_path, finalTime
         
         for m in n.get_neighbours():
             if m not in open_list and m not in closed_list:
