@@ -50,7 +50,7 @@ def comparison():
         signal.alarm(180)
         try:
             start_time_bfs = time.time()
-            result = hanoi_bfs(State(towers), State([row for row in towers[::-1]]))
+            result, _  = hanoi_bfs(State(towers), State([row for row in towers[::-1]]))
             elapsed_time_bfs = time.time() - start_time_bfs
 
             if result is not None:
@@ -66,7 +66,7 @@ def comparison():
         signal.alarm(180)
         try:
             start_time_A_star_one = time.time()
-            result = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 0)
+            result, _ = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 0)
             elapsed_time_A_star_one = time.time() - start_time_A_star_one
 
             if result is not None:
@@ -82,7 +82,7 @@ def comparison():
         signal.alarm(180)
         try:
             start_time_A_star_two = time.time()
-            result = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 1)
+            result, _  = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 1)
             elapsed_time_A_star_two = time.time() - start_time_A_star_two
 
             if result is not None:
@@ -98,7 +98,7 @@ def comparison():
         signal.alarm(180)
         try:
             start_time_A_star_four = time.time()
-            result = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 2)
+            result, _  = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 2)
             elapsed_time_A_star_four = time.time() - start_time_A_star_four
 
             if result is not None:
@@ -171,10 +171,10 @@ def compare_PDB():
         towers[0] = list(range(n, 0, -1))
         print("Attempting " + str(n) + " discs...")
         signal.signal(signal.SIGALRM, handler)
-        signal.alarm(3600)
+        signal.alarm(600)
         try:
             start_time = time.time()
-            result = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 4, PDB=PDB)
+            result, _  = hanoi_a_star(State(towers), State([row for row in towers[::-1]]), n, 3, PDB=PDB)
             elapsed_time = time.time() - start_time
 
             if result is not None:
